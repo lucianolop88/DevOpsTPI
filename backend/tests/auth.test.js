@@ -1,11 +1,11 @@
 const request = require("supertest");
-const app = require("../app"); // Asegurate que exportás `app` en lugar de hacer app.listen directamente
+const app = require("../app");
 const mongoose = require("mongoose");
 const User = require("../models/User");
 
 describe("Auth API", () => {
   beforeAll(async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/exampleDatabase", {
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
