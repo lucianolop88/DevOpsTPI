@@ -64,7 +64,7 @@ export default function App() {
     />
   );
 
-  // Solo envolver con <BrowserRouter> si no estamos en test
+  
   if (process.env.NODE_ENV === 'test') {
     return content;
   }
