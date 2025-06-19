@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: devopstpi-backend
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./Dockerfile
+    build:
+      args:
+        MONGO_URI: mongodb+srv://lucianolop88:1234@devopstpi.0s7djtg.mongodb.net/
+    envVars:
+      - key: NODE_ENV
+        value: production
