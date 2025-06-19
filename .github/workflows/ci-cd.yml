@@ -71,15 +71,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Merge develop into main
-        uses: devops-infra/action-pull-request@v0.5.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: develop
-          target_branch: main
-          title: "Auto-merge develop into main after passing tests"
-          body: "All checks passed in develop, merging to main."
+          ref: develop
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge develop into main
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge origin/develop --no-ff -m "Auto-merge develop into main"
+          git push origin main
 
   deploy:
     needs: auto-merge
